@@ -1,132 +1,45 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CCT Test Results</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f4f8;
-      margin: 0;
-      padding: 20px;
-    }
-    .container {
-      max-width: 500px;
-      background: white;
-      margin: 0 auto;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-    h1 {
-      text-align: center;
-      color: #4a4a4a;
-    }
-    .input-group {
-      margin: 10px 0;
-    }
-    .input-group label {
-      display: block;
-      margin-bottom: 5px;
-      color: #333;
-    }
-    .input-group input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-    }
-    .score-box {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 10px;
-      background: #f9fafb;
-      display: none;
-    }
-    .score-box p {
-      margin: 8px 0;
-      font-size: 16px;
-    }
-    .overall-score {
-      width: 80px;
-      height: 80px;
-      background-color: red;
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-      margin: 20px auto;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #0077cc;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #005fa3;
-    }
-    .error {
-      color: red;
-      text-align: center;
-      margin-top: 10px;
-      display: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        form { margin: 20px; }
+        input[type="text"] { padding: 10px; width: 200px; }
+        button { padding: 10px 20px; cursor: pointer; }
+        .result { margin-top: 20px; font-size: 20px; }
+        .error { margin-top: 20px; color: red; font-size: 18px; }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>CCT</h1>
-    <div class="input-group">
-      <label for="name">Student Name:</label>
-      <input type="text" id="name" placeholder="Enter your name">
-    </div>
-    <div class="input-group">
-      <label for="seat">Seat Number:</label>
-      <input type="text" id="seat" placeholder="Enter your seat number">
-    </div>
-    <button onclick="showResults()">Show Results</button>
-    <div class="error" id="error">Incorrect name or seat number. Please try again.</div>
+    <h1>Welcome to the School Results Portal</h1>
+    <form id="resultForm">
+        <label for="seed_number">Enter Your Seed Number:</label><br>
+        <input type="text" id="seed_number" name="seed_number" required><br><br>
+        <button type="button" onclick="getResult()">Get Result</button>
+    </form>
+    <div id="output"></div><script>
+    const students = {
+        "2320": { name: "Mark Zuckerberg", result: 29 },
+        "2920": { name: "Nemo Aydin", result: Math.floor(Math.random() * 10) + 20 },
+        "5000": { name: "Tabor Kalt", result: Math.floor(Math.random() * 10) + 20 },
+        "6000": { name: "Simon Aydin", result: Math.floor(Math.random() * 10) + 20 }
+    };
 
-    <div class="score-box" id="resultBox">
-      <p><strong>Student Name:</strong> <span id="outName"></span></p>
-      <p><strong>Seat Number:</strong> <span id="outSeat"></span></p>
-      <p><strong>BCCT:</strong></p>
-      <p>Math: 19</p>
-      <p>English: 15</p>
-      <p>Arabic and Islamic: 23</p>
-      <div class="overall-score">68</div>
-      <p><strong>ACCT:</strong> 11</p>
-      <p><strong>Maths section:</strong> All</p>
-    </div>
-  </div>
+    function getResult() {
+        const seedNumber = document.getElementById('seed_number').value;
+        const output = document.getElementById('output');
+        output.innerHTML = '';
 
-  <script>
-    function showResults() {
-      const name = document.getElementById('name').value.trim().toLowerCase();
-      const seat = document.getElementById('seat').value.trim().toUpperCase();
-      const correctName = "ali ahmed";
-      const correctSeat = "17A234578";
-
-      if(name === correctName && seat === correctSeat) {
-        document.getElementById('outName').textContent = name;
-        document.getElementById('outSeat').textContent = seat;
-        document.getElementById('resultBox').style.display = 'block';
-        document.getElementById('error').style.display = 'none';
-      } else {
-        document.getElementById('resultBox').style.display = 'none';
-        document.getElementById('error').style.display = 'block';
-      }
+        if (students[seedNumber]) {
+            const student = students[seedNumber];
+            output.innerHTML = `<div class='result'><p><strong>Student Name:</strong> ${student.name}</p><p><strong>Result:</strong> ${student.result}</p></div>`;
+        } else {
+            output.innerHTML = `<div class='error'>Invalid seed number. Please try again.</div>`;
+        }
     }
-  </script>
+</script>
+
 </body>
 </html>
