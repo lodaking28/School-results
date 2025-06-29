@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CCT Test Results</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f4f8;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      background: white;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #4a4a4a;
+    }
+    .input-group {
+      margin: 10px 0;
+    }
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    .score-box {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      background: #f9fafb;
+      display: none;
+    }
+    .score-box p {
+      margin: 8px 0;
+      font-size: 16px;
+    }
+    .overall-score {
+      width: 80px;
+      height: 80px;
+      background-color: red;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      margin: 20px auto;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>CCT</h1>
+    <div class="input-group">
+      <label for="name">Student Name:</label>
+      <input type="text" id="name" placeholder="Enter your name">
+    </div>
+    <div class="input-group">
+      <label for="seat">Seat Number:</label>
+      <input type="text" id="seat" placeholder="Enter your seat number">
+    </div>
+    <button onclick="showResults()">Show Results</button>
+    <div class="error" id="error">Incorrect name or seat number. Please try again.</div>
+
+    <div class="score-box" id="resultBox">
+      <p><strong>Student Name:</strong> <span id="outName"></span></p>
+      <p><strong>Seat Number:</strong> <span id="outSeat"></span></p>
+      <p><strong>BCCT:</strong></p>
+      <p>Math: 19</p>
+      <p>English: 15</p>
+      <p>Arabic and Islamic: 23</p>
+      <div class="overall-score">68</div>
+      <p><strong>ACCT:</strong> 11</p>
+      <p><strong>Maths section:</strong> All</p>
+    </div>
+  </div>
+
+  <script>
+    function showResults() {
+      const name = document.getElementById('name').value.trim().toLowerCase();
+      const seat = document.getElementById('seat').value.trim().toUpperCase();
+      const correctName = "ali ahmed";
+      const correctSeat = "17A234578";
+
+      if(name === correctName && seat === correctSeat) {
+        document.getElementById('outName').textContent = name;
+        document.getElementById('outSeat').textContent = seat;
+        document.getElementById('resultBox').style.display = 'block';
+        document.getElementById('error').style.display = 'none';
+      } else {
+        document.getElementById('resultBox').style.display = 'none';
+        document.getElementById('error').style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
